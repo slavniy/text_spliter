@@ -50,30 +50,20 @@ for area_number in range(len(tree)):
         for sentence_number in range(len(tree[area_number][paragraph_number])):
             tree[area_number][paragraph_number][sentence_number] = get_words(
                 tree[area_number][paragraph_number][sentence_number])
+words = tree
 
-# for area_number in range(len(tree)):
-#     for paragraph_number in range(len(tree[area_number])):
-#         for sentence_number in range(len(tree[area_number][paragraph_number])):
-#             for word_number in range(len(tree[area_number][paragraph_number][sentence_number])):
-#                 adress = f'{area_number + 1}:{paragraph_number + 1}:{sentence_number + 1}:{word_number + 1}'
-#                 word = tree[area_number][paragraph_number][sentence_number][word_number]
-#                 if word not in addresses:
-#                     addresses[word] = [adress]
-#                 else:
-#                     addresses[word].append(adress)
-
-# '''Получение адресов слов'''
-# addresses = dict()
-# for area_number in range(len(tree)):
-#     for paragraph_number in range(len(tree[area_number])):
-#         for sentence_number in range(len(tree[area_number][paragraph_number])):
-#             for word_number in range(len(tree[area_number][paragraph_number][sentence_number])):
-#                 adress = f'{area_number+1}:{paragraph_number+1}:{sentence_number+1}:{word_number+1}'
-#                 word = tree[area_number][paragraph_number][sentence_number][word_number]
-#                 if word not in addresses:
-#                     addresses[word] = [adress]
-#                 else:
-#                     addresses[word].append(adress)
-# for word in addresses:
-#     if len(addresses[word]) > 1:
-#         print(word, addresses[word])
+'''Получение адресов слов'''
+statistics = dict()
+for area_number in range(len(tree)):
+    for paragraph_number in range(len(tree[area_number])):
+        for sentence_number in range(len(tree[area_number][paragraph_number])):
+            for word_number in range(len(tree[area_number][paragraph_number][sentence_number])):
+                address = f'{area_number+1}:{paragraph_number+1}:{sentence_number+1}:{word_number+1}'
+                word = tree[area_number][paragraph_number][sentence_number][word_number]
+                if word not in statistics:
+                    statistics[word] = {'addresses':[], 'text':word, 'energy': 200, 'length':len(word), 'count':0}
+                statistics[word]['count'] += 1
+                statistics[word]['addresses'].append(address)
+words = list(statistics.values())
+for word in words:
+    print(word)
